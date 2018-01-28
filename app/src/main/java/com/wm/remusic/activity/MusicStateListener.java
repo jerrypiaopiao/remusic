@@ -1,6 +1,7 @@
 package com.wm.remusic.activity;
 
 /**
+ * 音乐状态更新监听器
  * Created by wm on 2016/12/23.
  */
 public interface MusicStateListener {

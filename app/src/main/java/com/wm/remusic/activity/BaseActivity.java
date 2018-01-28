@@ -1,5 +1,6 @@
 package com.wm.remusic.activity;
 
+import android.annotation.SuppressLint;
 import android.content.BroadcastReceiver;
 import android.content.ComponentName;
 import android.content.Context;
@@ -31,10 +32,22 @@ import static com.wm.remusic.service.MusicPlayer.mService;
  */
 public class BaseActivity extends AppCompatActivity implements ServiceConnection {
 
+    /**
+     * ServiceToken, 目前用途不明
+     */
     private MusicPlayer.ServiceToken mToken;
+    /**
+     * 用于接收播放状态变化{@link BroadcastReceiver}
+     */
     private PlaybackStatus mPlaybackStatus; //receiver 接受播放状态变化等
+    /**
+     * 界面底部播放控制栏
+     */
     private QuickControlsFragment fragment; //底部播放控制栏
     private String TAG = "BaseActivity";
+    /**
+     * 音乐播放状态监听器列表
+     */
     private ArrayList<MusicStateListener> mMusicListener = new ArrayList<>();
 
     /**
@@ -58,6 +71,7 @@ public class BaseActivity extends AppCompatActivity implements ServiceConnection
 
     /**
      *  fragment界面刷新
+     *
      */
     public void refreshUI() {
         for (final MusicStateListener listener : mMusicListener) {
@@ -68,6 +82,9 @@ public class BaseActivity extends AppCompatActivity implements ServiceConnection
 
     }
 
+    /**
+     * 更新时间
+     */
     public void updateTime() {
         for (final MusicStateListener listener : mMusicListener) {
             if (listener != null) {
@@ -77,25 +94,31 @@ public class BaseActivity extends AppCompatActivity implements ServiceConnection
     }
 
     /**
-     *  歌曲切换
+     * 歌曲切换
      */
     public void updateTrack() {
 
     }
 
 
-
+    /**
+     * 更新歌词
+     */
     public void updateLrc() {
 
     }
 
     /**
+     * 更新歌曲缓冲进度值
      * @param p 更新歌曲缓冲进度值，p取值从0~100
      */
     public void updateBuffer(int p) {
 
     }
 
+    /**
+     * 主题切换
+     */
     public void changeTheme() {
         for (final MusicStateListener listener : mMusicListener) {
             if (listener != null) {
@@ -117,7 +140,7 @@ public class BaseActivity extends AppCompatActivity implements ServiceConnection
      */
     @Override
     protected void onSaveInstanceState(Bundle outState) {
-        //super.onSaveInstanceState(outState);
+        super.onSaveInstanceState(outState);
     }
 
     /**
@@ -151,26 +174,33 @@ public class BaseActivity extends AppCompatActivity implements ServiceConnection
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
         mToken = MusicPlayer.bindToService(this, this);
         mPlaybackStatus = new PlaybackStatus(this);
 
+        //创建广播过滤器
         IntentFilter f = new IntentFilter();
-        f.addAction(MediaService.PLAYSTATE_CHANGED);
-        f.addAction(MediaService.META_CHANGED);
-        f.addAction(MediaService.QUEUE_CHANGED);
-        f.addAction(IConstants.MUSIC_COUNT_CHANGED);
-        f.addAction(MediaService.TRACK_PREPARED);
-        f.addAction(MediaService.BUFFER_UP);
-        f.addAction(IConstants.EMPTY_LIST);
-        f.addAction(MediaService.MUSIC_CHANGED);
-        f.addAction(MediaService.LRC_UPDATED);
-        f.addAction(IConstants.PLAYLIST_COUNT_CHANGED);
-        f.addAction(MediaService.MUSIC_LODING);
+        f.addAction(MediaService.PLAYSTATE_CHANGED);//播放状态更新过滤
+        f.addAction(MediaService.META_CHANGED);//META属性变更过滤
+        f.addAction(MediaService.QUEUE_CHANGED);//播放队列修改变更
+        f.addAction(IConstants.MUSIC_COUNT_CHANGED);//播放歌曲数量变更
+        f.addAction(MediaService.TRACK_PREPARED);//最近更新准备?
+        f.addAction(MediaService.BUFFER_UP);//未知
+        f.addAction(IConstants.EMPTY_LIST);//清空播放列表?
+        f.addAction(MediaService.MUSIC_CHANGED);//切换正在播放的音乐
+        f.addAction(MediaService.LRC_UPDATED);//歌词更新
+        f.addAction(IConstants.PLAYLIST_COUNT_CHANGED);//播放列表数量更新
+        f.addAction(MediaService.MUSIC_LODING);//加载音乐
         registerReceiver(mPlaybackStatus, new IntentFilter(f));
         showQuickControl(true);
     }
 
 
+    /**
+     * 连接播放的service
+     * @param name
+     * @param service
+     */
     @Override
     public void onServiceConnected(final ComponentName name, final IBinder service) {
         mService = MediaAidlInterface.Stub.asInterface(service);
@@ -228,6 +258,7 @@ public class BaseActivity extends AppCompatActivity implements ServiceConnection
         }
 
 
+        @SuppressLint("StringFormatInvalid")
         @Override
         public void onReceive(final Context context, final Intent intent) {
             final String action = intent.getAction();
@@ -235,9 +266,8 @@ public class BaseActivity extends AppCompatActivity implements ServiceConnection
             if (baseActivity != null) {
                 if (action.equals(MediaService.META_CHANGED)) {
                     baseActivity.updateTrackInfo();
-
                 } else if (action.equals(MediaService.PLAYSTATE_CHANGED)) {
-
+                    //TODO do nothing at here at this moment...
                 } else if (action.equals(MediaService.TRACK_PREPARED)) {
                     baseActivity.updateTime();
                 } else if (action.equals(MediaService.BUFFER_UP)) {
@@ -245,7 +275,7 @@ public class BaseActivity extends AppCompatActivity implements ServiceConnection
                 } else if (action.equals(MediaService.MUSIC_LODING)) {
                     baseActivity.loading(intent.getBooleanExtra("isloading",false));
                 } else if (action.equals(MediaService.REFRESH)) {
-
+                    //TODO do nothing at here at this moment...
                 } else if (action.equals(IConstants.MUSIC_COUNT_CHANGED)) {
                     baseActivity.refreshUI();
                 } else if (action.equals(IConstants.PLAYLIST_COUNT_CHANGED)) {

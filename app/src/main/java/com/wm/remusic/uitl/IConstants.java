@@ -22,8 +22,14 @@ package com.wm.remusic.uitl;
  */
 public interface IConstants {
 
+    /**
+     * 当前播放的歌曲数量更新
+     */
     String MUSIC_COUNT_CHANGED = "com.wm.remusic.musiccountchanged";
     String PLAYLIST_ITEM_MOVED = "com.wm.remusic.mmoved";
+    /**
+     * 播放列表数量更新?
+     */
     String PLAYLIST_COUNT_CHANGED = "com.wm.remusic.playlistcountchanged";
     String CHANGE_THEME = "com.wm.remusic.themechange";
     String EMPTY_LIST = "com.wm.remusic.emptyplaylist";

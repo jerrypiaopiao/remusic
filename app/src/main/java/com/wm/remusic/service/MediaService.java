@@ -116,14 +116,26 @@ import java.util.TreeSet;
 
 @SuppressLint("NewApi")
 public class MediaService extends Service {
+    /**
+     * 在{@link com.wm.remusic.activity.RecentActivity}中没有具体的操作
+     */
     public static final String PLAYSTATE_CHANGED = "com.wm.remusic.playstatechanged";
     public static final String POSITION_CHANGED = "com.wm.remusic.positionchanged";
+    /**
+     * 更新歌曲状态信息
+     */
     public static final String META_CHANGED = "com.wm.remusic.metachanged";
     public static final String PLAYLIST_ITEM_MOVED = "com.wm.remusic.mmoved";
+    /**
+     * 更新播放队列
+     */
     public static final String QUEUE_CHANGED = "com.wm.remusic.queuechanged";
     public static final String PLAYLIST_CHANGED = "com.wm.remusic.playlistchanged";
     public static final String REPEATMODE_CHANGED = "com.wm.remusic.repeatmodechanged";
     public static final String SHUFFLEMODE_CHANGED = "com.wm.remusic.shufflemodechanged";
+    /**
+     * 错误信息追踪
+     */
     public static final String TRACK_ERROR = "com.wm.remusic.trackerror";
     public static final String TIMBER_PACKAGE_NAME = "com.wm.remusic";
     public static final String MUSIC_PACKAGE_NAME = "com.android.music";
@@ -134,11 +146,17 @@ public class MediaService extends Service {
     public static final String PREVIOUS_ACTION = "com.wm.remusic.previous";
     public static final String PREVIOUS_FORCE_ACTION = "com.wm.remusic.previous.force";
     public static final String NEXT_ACTION = "com.wm.remusic.next";
+    /**
+     * 歌曲切换
+     */
     public static final String MUSIC_CHANGED = "com.wm.remusi.change_music";
     public static final String REPEAT_ACTION = "com.wm.remusic.repeat";
     public static final String SHUFFLE_ACTION = "com.wm.remusic.shuffle";
     public static final String FROM_MEDIA_BUTTON = "frommediabutton";
     public static final String REFRESH = "com.wm.remusic.refresh";
+    /**
+     * 更新歌词
+     */
     public static final String LRC_UPDATED = "com.wm.remusic.updatelrc";
     public static final String UPDATE_LOCKSCREEN = "com.wm.remusic.updatelockscreen";
     public static final String CMDNAME = "command";
@@ -149,11 +167,20 @@ public class MediaService extends Service {
     public static final String CMDPREVIOUS = "previous";
     public static final String CMDNEXT = "next";
     public static final String CMDNOTIF = "buttonId";
+    /**
+     * 更新时间?
+     */
     public static final String TRACK_PREPARED = "com.wm.remusic.prepared";
     public static final String TRY_GET_TRACKINFO = "com.wm.remusic.gettrackinfo";
+    /**
+     * 更新歌曲缓冲进度值
+     */
     public static final String BUFFER_UP = "com.wm.remusic.bufferup";
     public static final String LOCK_SCREEN = "com.wm.remusic.lock";
     public static final String SEND_PROGRESS = "com.wm.remusic.progress";
+    /**
+     * 歌曲是否加载中
+     */
     public static final String MUSIC_LODING = "com.wm.remusic.loading";
     private static final String SHUTDOWN = "com.wm.remusic.shutdown";
     public static final String SETQUEUE = "com.wm.remusic.setqueue";
