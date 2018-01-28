@@ -7,6 +7,9 @@ import android.os.Bundle;
 import android.os.Parcel;
 import android.os.Parcelable;
 
+/**
+ * 文件夹类
+ */
 public class FolderInfo implements Parcelable {
 
     public static String KEY_FOLDER_NAME = "folder_name";

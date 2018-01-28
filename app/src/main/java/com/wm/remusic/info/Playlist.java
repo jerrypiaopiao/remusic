@@ -14,6 +14,9 @@
 
 package com.wm.remusic.info;
 
+/**
+ * 播放列表类
+ */
 public class Playlist {
 
     public final long id;

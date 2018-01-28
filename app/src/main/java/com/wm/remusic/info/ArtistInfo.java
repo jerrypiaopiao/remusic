@@ -7,6 +7,9 @@ import android.os.Bundle;
 import android.os.Parcel;
 import android.os.Parcelable;
 
+/**
+ * 艺术家信息类
+ */
 public class ArtistInfo implements Parcelable {
 
     public static final String KEY_ARTIST_NAME = "artist_name";

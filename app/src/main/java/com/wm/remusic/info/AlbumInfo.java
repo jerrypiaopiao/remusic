@@ -7,7 +7,9 @@ import android.os.Bundle;
 import android.os.Parcel;
 import android.os.Parcelable;
 
-
+/**
+ * 专辑信息类
+ */
 public class AlbumInfo implements Parcelable {
 
     public static final String KEY_ALBUM_NAME = "album_name";

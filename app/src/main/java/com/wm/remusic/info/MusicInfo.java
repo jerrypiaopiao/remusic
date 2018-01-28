@@ -7,6 +7,9 @@ import android.os.Bundle;
 import android.os.Parcel;
 import android.os.Parcelable;
 
+/**
+ * 歌曲实体类,包含了歌曲的各种详细属性信息
+ */
 public class MusicInfo implements Parcelable {
 
     public static final String KEY_SONG_ID = "songid";
